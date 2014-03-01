@@ -1,0 +1,33 @@
+<%= form_for(@coordinate) do |f| %>
+  <% if @coordinate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coordinate.errors.count, "error") %> prohibited this coordinate from being saved:</h2>
+
+      <ul>
+      <% @coordinate.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :longitude %><br>
+    <%= f.number_field :longitude %>
+  </div>
+  <div class="field">
+    <%= f.label :latitude %><br>
+    <%= f.number_field :latitude %>
+  </div>
+  <div class="field">
+    <%= f.label :to_user %><br>
+    <%= f.number_field :to_user %>
+  </div>
+  <div class="field">
+    <%= f.label :from_user %><br>
+    <%= f.number_field :from_user %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

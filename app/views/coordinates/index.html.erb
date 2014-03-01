@@ -1,0 +1,33 @@
+<h1>Listing coordinates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Longitude</th>
+      <th>Latitude</th>
+      <th>To user</th>
+      <th>From user</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coordinates.each do |coordinate| %>
+      <tr>
+        <td><%= coordinate.longitude %></td>
+        <td><%= coordinate.latitude %></td>
+        <td><%= coordinate.to_user %></td>
+        <td><%= coordinate.from_user %></td>
+        <td><%= link_to 'Show', coordinate %></td>
+        <td><%= link_to 'Edit', edit_coordinate_path(coordinate) %></td>
+        <td><%= link_to 'Destroy', coordinate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Coordinate', new_coordinate_path %>
