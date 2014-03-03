@@ -23,7 +23,7 @@ describe CoordinatesController do
   # This should return the minimal set of attributes required to create a valid
   # Coordinate. As you add validations to Coordinate, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "longitude" => "1" } }
+  let(:valid_attributes) { { "longitude" => "9.99" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -106,8 +106,8 @@ describe CoordinatesController do
         # specifies that the Coordinate created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Coordinate.any_instance.should_receive(:update).with({ "longitude" => "1" })
-        put :update, {:id => coordinate.to_param, :coordinate => { "longitude" => "1" }}, valid_session
+        Coordinate.any_instance.should_receive(:update).with({ "longitude" => "9.99" })
+        put :update, {:id => coordinate.to_param, :coordinate => { "longitude" => "9.99" }}, valid_session
       end
 
       it "assigns the requested coordinate as @coordinate" do

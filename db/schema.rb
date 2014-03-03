@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228044343) do
+ActiveRecord::Schema.define(version: 20140303035138) do
 
   create_table "coordinates", force: true do |t|
-    t.integer  "longitude"
-    t.integer  "latitude"
+    t.decimal  "longitude"
+    t.decimal  "latitude"
     t.integer  "to_user"
     t.integer  "from_user"
     t.datetime "created_at"

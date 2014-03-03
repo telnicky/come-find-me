@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "coordinates/new" do
   before(:each) do
     assign(:coordinate, stub_model(Coordinate,
-      :longitude => 1,
-      :latitude => 1,
+      :longitude => "9.99",
+      :latitude => "9.99",
       :to_user => 1,
       :from_user => 1
     ).as_new_record)
