@@ -10,6 +10,7 @@ class LocationRequest < ActiveRecord::Base
   # Validations
   #
   validate :sender_is_friend
+  validates_presence_of :user, :location
 
   ##
   # Instance methods
