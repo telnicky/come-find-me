@@ -1,0 +1,29 @@
+<h1>Listing location_requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Location</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @location_requests.each do |location_request| %>
+      <tr>
+        <td><%= location_request.user_id %></td>
+        <td><%= location_request.location_id %></td>
+        <td><%= link_to 'Show', location_request %></td>
+        <td><%= link_to 'Edit', edit_location_request_path(location_request) %></td>
+        <td><%= link_to 'Destroy', location_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Location request', new_location_request_path %>

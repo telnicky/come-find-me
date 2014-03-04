@@ -11,13 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303035138) do
+ActiveRecord::Schema.define(version: 20140304203521) do
 
-  create_table "coordinates", force: true do |t|
+  create_table "friendships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "accepted",   default: false
+  end
+
+  create_table "location_requests", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "locations", force: true do |t|
+    t.integer  "user_id"
     t.decimal  "longitude"
     t.decimal  "latitude"
-    t.integer  "to_user"
-    t.integer  "from_user"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
