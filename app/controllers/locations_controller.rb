@@ -23,26 +23,37 @@ class LocationsController < ApplicationController
   def create
     @location = Location.new(location_params)
 
-    if @location.save
-      redirect_to @location, notice: 'Location was successfully created.'
-    else
-      render action: 'new'
+    respond_to do |format|
+      if @location.save
+        format.html { redirect_to @location, notice: 'location was successfully created.' }
+        format.json { render :json => @location }
+      else
+        format.html { render :action => :new }
+        format.json { render json: @location.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # PATCH/PUT /locations/1
   def update
-    if @location.update(location_params)
-      redirect_to @location, notice: 'Location was successfully updated.'
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @location.update(location_params)
+        format.html { redirect_to @location, notice: 'location was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render :action => :edit }
+        format.json { render json: @location.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # DELETE /locations/1
   def destroy
     @location.destroy
-    redirect_to locations_url, notice: 'Location was successfully destroyed.'
+    respond_to do |format|
+      format.html { redirect_to location_url }
+      format.json { head :no_content }
+    end
   end
 
   private

@@ -23,26 +23,37 @@ class LocationRequestsController < ApplicationController
   def create
     @location_request = LocationRequest.new(location_request_params)
 
-    if @location_request.save
-      redirect_to @location_request, notice: 'Location request was successfully created.'
-    else
-      render action: 'new'
+    respond_to do |format|
+      if @location_request.save
+        format.html { redirect_to @location_request, notice: 'location_request was successfully created.' }
+        format.json { render :json => @location_request }
+      else
+        format.html { render :action => :new }
+        format.json { render json: @location_request.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # PATCH/PUT /location_requests/1
   def update
-    if @location_request.update(location_request_params)
-      redirect_to @location_request, notice: 'Location request was successfully updated.'
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @location_request.update(location_request_params)
+        format.html { redirect_to @location_request, notice: 'location_request was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render :action => :edit }
+        format.json { render json: @location_request.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # DELETE /location_requests/1
   def destroy
     @location_request.destroy
-    redirect_to location_requests_url, notice: 'Location request was successfully destroyed.'
+    respond_to do |format|
+      format.html { redirect_to location_request_url }
+      format.json { head :no_content }
+    end
   end
 
   private
