@@ -1,0 +1,12 @@
+
+create session request (login):
+curl -X POST -H "Content-Type: application/json" -d '{"email":"p@p.com","password":"password"}' http://elnicky.com/login.json
+
+create user request (sign up):
+curl -X POST -H "Content-Type: application/json" -d '{"user":{"email":"pp@pp.com","password":"password", "password_confirmation":"password", "name":"pp"}}'  http://elnicky.com/signup.json
+
+destroy user session (logout):
+curl -X DELETE -H "Content-Type: application/json" http://elnicky.com/logout.json
+
+
+Note: the auth token received from these should be stored as a cookie named auth_token

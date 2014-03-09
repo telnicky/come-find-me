@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   #
   has_many :friendships, :dependent => :destroy
   has_many :friends, lambda { Friendship.where(:accepted => true) }, :through => :friendships
+
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, lambda { Friendship.where(:accepted => true) }, :through => :inverse_friendships, :source => :user
 

@@ -1,5 +1,5 @@
 object @user
-attributes :id, :email, :name
+attributes :id, :email, :name, :auth_token
 
 child :friends => :friends do
   attributes :id, :email, :name
