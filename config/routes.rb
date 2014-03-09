@@ -10,6 +10,8 @@ ComeFindMe::Application.routes.draw do
 
   resources :friendships
 
+  resources :password_resets
+
   resources :sessions
 
   resources :users
