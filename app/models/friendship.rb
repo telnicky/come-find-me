@@ -9,6 +9,7 @@ class Friendship < ActiveRecord::Base
   # Validations
   #
   validates_uniqueness_of :friend_id, :scope => :user_id, :message => "Relationship already exists"
+  validates_presence_of :friend, :user
   validate :inverse_friendship_not_present?
   validate :cant_friend_yourself
 
