@@ -32,6 +32,7 @@ end
 
 gem 'rspec-rails'
 gem 'pry-nav'
+gem 'cancancan', '~> 1.7'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
