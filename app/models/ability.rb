@@ -5,6 +5,7 @@ class Ability
     user ||= User.new
 
     # User
+    can :create, User
     can :read, User
     can :update, User, :id => user.id
     can :destroy, User, :id => user.id
@@ -27,6 +28,7 @@ class Ability
 
     # Location Requests
     can :read, LocationRequest, :user_id => user.id
+    can :read, LocationRequest, :location => { :user_id => user.id }
     can :destroy, LocationRequest, :user_id => user.id
     can :create, LocationRequest, :location => { :user_id => user.id }
     can :update, LocationRequest, :location => { :user_id => user.id }

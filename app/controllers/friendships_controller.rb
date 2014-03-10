@@ -1,4 +1,5 @@
 class FriendshipsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_friendship, only: [:show, :edit, :update, :destroy]
 
   # GET /friendships

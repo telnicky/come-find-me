@@ -1,5 +1,6 @@
 class LocationRequestsController < ApplicationController
   load_and_authorize_resource
+  skip_authorize_resource :only => :new
   before_action :set_location_request, only: [:show, :edit, :update, :destroy]
 
   # GET /location_requests

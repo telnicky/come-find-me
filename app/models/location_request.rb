@@ -9,14 +9,14 @@ class LocationRequest < ActiveRecord::Base
   ##
   # Validations
   #
-  validate :sender_is_friend
   validates_presence_of :user, :location
+  validate :sender_is_friend
 
   ##
   # Instance methods
   #
   def sender_is_friend
-    unless user.has_friend?(sender)
+    unless user && user.has_friend?(sender)
       errors.add(:user_id, "is not a friend of sender")
     end
   end
