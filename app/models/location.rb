@@ -5,6 +5,8 @@ class Location < ActiveRecord::Base
   belongs_to :user
   has_many :location_requests, :dependent => :destroy
 
+  scope :by_user, lambda { |user| where(:user_id => user.id) }
+
   ##
   # Validations
   #

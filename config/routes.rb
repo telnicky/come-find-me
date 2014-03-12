@@ -16,7 +16,9 @@ ComeFindMe::Application.routes.draw do
 
   resources :sessions
 
-  resources :users
+  resources :users, :except => :index do
+    get :search, :on => :collection
+  end
 
-  root 'users#index'
+  root 'sessions#new'
 end

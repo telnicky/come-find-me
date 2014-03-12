@@ -4,7 +4,7 @@ class FriendshipsController < ApplicationController
 
   # GET /friendships
   def index
-    @friendships = Friendship.all
+    @friendships = Friendship.by_user(current_user) if current_user
   end
 
   # GET /friendships/1

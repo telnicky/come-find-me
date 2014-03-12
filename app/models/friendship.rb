@@ -5,6 +5,11 @@ class Friendship < ActiveRecord::Base
   belongs_to :user
   belongs_to :friend, :class_name => 'User'
 
+  scope :by_user, lambda { |user|
+    where(arel_table[:user_id].eq(user.id)
+            .or(arel_table[:friend_id].eq(user.id)))
+  }
+
   ##
   # Validations
   #

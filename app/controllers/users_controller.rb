@@ -13,6 +13,10 @@ class UsersController < ApplicationController
   def show
   end
 
+  def search
+    @user = User.find_by_email(params[:email])
+  end
+
   # GET /users/new
   def new
     @user = User.new
@@ -73,4 +77,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:email, :name, :password, :password_confirmation, :password_digest)
     end
+
 end

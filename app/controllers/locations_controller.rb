@@ -4,7 +4,7 @@ class LocationsController < ApplicationController
 
   # GET /locations
   def index
-    @locations = Location.all
+    @locations = Location.by_user(current_user) if current_user
   end
 
   # GET /locations/1

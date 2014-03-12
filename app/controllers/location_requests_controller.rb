@@ -5,7 +5,7 @@ class LocationRequestsController < ApplicationController
 
   # GET /location_requests
   def index
-    @location_requests = LocationRequest.all
+    @location_requests = LocationRequest.by_user(current_user) if current_user
   end
 
   # GET /location_requests/1

@@ -6,6 +6,8 @@ class LocationRequest < ActiveRecord::Base
   belongs_to :location
   has_one :sender, :through => :location, :source => :user, :foreign_key => 'user_id'
 
+  scope :by_user, lambda { |user| where(:user_id => user.id) }
+
   ##
   # Validations
   #
