@@ -1,16 +1,14 @@
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+
+<% @display_attributes.each do |attribute| %>
+  <p>
+  <strong><%= attribute.to_s %>:</strong>
+  <%= @user.try(attribute) %>
+  </p>
+<% end %>
 
 <p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Id:</strong>
-  <%= @user.id %>
+  <strong>id:</strong>
+  <%= @user.try(:id) %>
 </p>
 
 

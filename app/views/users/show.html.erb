@@ -8,6 +8,16 @@
   <%= @user.name %>
 </p>
 
+<p>
+  <strong>Id:</strong>
+  <%= @user.id %>
+</p>
+
+<p>
+  <strong>Phone Number:</strong>
+  <%= @user.phone_number %>
+</p>
+
 <h2>Your Friends</h2>
 <ul>
   <% @user.friends.each do |friend| %>

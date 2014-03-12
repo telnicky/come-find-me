@@ -14,12 +14,18 @@ class User < ActiveRecord::Base
   has_many :locations, :dependent => :destroy
   has_many :location_requests, :dependent => :destroy
 
+  scope :by_email_or_phone_number, lambda { |email, phone_number|
+    where(arel_table[:email].eq(email)
+      .or(arel_table[:phone_number].eq(phone_number)))
+  }
+
   ##
   # Validations
   #
   validates_uniqueness_of :email, :name
   validates_presence_of :email, :name
   validates_format_of :email, :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
+  validates_format_of :phone_number, :with => /\A\d{3}-\d{3}-\d{4}\z/
 
   ##
   # Instance Methods

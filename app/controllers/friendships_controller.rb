@@ -22,7 +22,7 @@ class FriendshipsController < ApplicationController
 
   # POST /friendships
   def create
-    @friendship = Friendship.new(friendship_params)
+    @friendship = Friendship.new(create_params)
 
     respond_to do |format|
       if @friendship.save
@@ -38,7 +38,7 @@ class FriendshipsController < ApplicationController
   # PATCH/PUT /friendships/1
   def update
     respond_to do |format|
-      if @friendship.update(friendship_params)
+      if @friendship.update(update_params)
         format.html { redirect_to @friendship, notice: 'Friendship was successfully updated.' }
         format.json { head :no_content }
       else
@@ -66,5 +66,13 @@ class FriendshipsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def friendship_params
       params.require(:friendship).permit(:user_id, :friend_id, :accepted)
+    end
+
+    def create_params
+      friendship_params.slice(:user_id, :friend_id)
+    end
+
+    def update_params
+      friendship_params.slice(:accepted)
     end
 end

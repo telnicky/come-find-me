@@ -15,11 +15,9 @@ class Ability
 
       # Friendship
       can :create, Friendship, :user_id => user.id
-      can :create, Friendship, :friend_id => user.id
       can :read, Friendship, :user_id => user.id
       can :read, Friendship, :friend_id => user.id
-      can :update, Friendship, :friend_id => user.id
-      can :update, Friendship, :user_id => user.id, :accepted => true
+      can :update, Friendship, :friend_id => user.id, :accepted => false
       can :destroy, Friendship, :user_id => user.id
       can :destroy, Friendship, :friend_id => user.id
 
