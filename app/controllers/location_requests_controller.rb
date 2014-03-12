@@ -1,6 +1,5 @@
 class LocationRequestsController < ApplicationController
   load_and_authorize_resource
-  skip_authorize_resource :only => :new
   before_action :set_location_request, only: [:show, :edit, :update, :destroy]
 
   # GET /location_requests
@@ -53,7 +52,7 @@ class LocationRequestsController < ApplicationController
   def destroy
     @location_request.destroy
     respond_to do |format|
-      format.html { redirect_to location_request_url }
+      format.html { redirect_to location_requests_url }
       format.json { head :no_content }
     end
   end

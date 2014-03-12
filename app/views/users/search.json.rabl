@@ -1,4 +1,4 @@
 object @user
 
-attributes :email, :name, :id
+attributes :id, *@display_attributes
 

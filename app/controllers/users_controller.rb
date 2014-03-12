@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @user = User.by_email_or_phone_number(search_params[:email], search_params[:phone_number]).first
 
     @display_attributes = search_params.map do |key, value|
-      if value == @user.try(key)
+      if value.present? && value == @user.try(key)
         key
       end
     end
