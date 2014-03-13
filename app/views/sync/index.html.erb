@@ -1,0 +1,88 @@
+<p>
+  <strong>Email:</strong>
+  <%= current_user.email %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= current_user.name %>
+</p>
+
+<p>
+  <strong>Id:</strong>
+  <%= current_user.id %>
+</p>
+
+<p>
+  <strong>Phone Number:</strong>
+  <%= current_user.phone_number %>
+</p>
+
+<h2>Your Friends</h2>
+<ul>
+  <% @friends.each do |friend| %>
+    <li>
+      <%= link_to friend.name, user_path(friend) %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Inverse friends (Users Who Have Befriended You)</h2>
+<ul>
+  <% @inverse_friends.each do |friend| %>
+    <li>
+      <%= link_to friend.name, user_path(friend) %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Your Friendships</h2>
+<ul>
+  <% @friendships.each do |friendship| %>
+    <li>
+      <%= link_to friendship.friend.name, user_path(friendship.friend) %>
+      <%= link_to "show", friendship_path(friendship) %>
+      <%= h "(Pending)" if !friendship.accepted? %>
+      (<%= link_to "remove", friendship, :method => :delete %>)
+    </li>
+  <% end %>  
+</ul>
+
+<h2>Inverse frienships</h2>
+<ul>
+  <% @inverse_friendships.each do |friendship| %>
+    <li>
+      <%= link_to friendship.user.name, user_path(friendship.user) %>
+      <%= link_to "show", friendship_path(friendship) %>
+      <%= h "(Pending)" if !friendship.accepted? %>
+      (<%= link_to "remove", friendship, :method => :delete %>)
+    </li>
+  <% end %>
+</ul>
+
+<h2>Locations</h2>
+<ul>
+  <% @locations.each do |location| %>
+    <li>
+      Long: <%= h location.longitude %>
+      Lat: <%= h location.latitude %>
+      <%= link_to "show", location_path(location) %>
+      (<%= link_to "remove", location, :method => :delete %>)
+    </li>
+  <% end %>
+</ul>
+
+<h2>Location Requests</h2>
+<ul>
+  <% @location_requests.each do |location_request| %>
+    <li>
+      From: <%= h location_request.sender.name %>
+      Long: <%= h location_request.location.longitude %>
+      Lat: <%= h location_request.location.latitude %>
+      <%= link_to "show", location_request_path(location_request) %>
+      (<%= link_to "remove", location_request, :method => :delete %>)
+    </li>
+  <% end %>
+</ul>
+
+

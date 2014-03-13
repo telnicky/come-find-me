@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   skip_authorization_check
   respond_to :html, :json
+
   def new
   end
 

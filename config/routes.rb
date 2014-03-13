@@ -16,6 +16,9 @@ ComeFindMe::Application.routes.draw do
 
   resources :sessions
 
+  resources :sync, :only => [ :index ]
+  get "sync/from/:from_date", :to => "sync#index"
+
   resources :users, :except => :index do
     get :search, :on => :collection
   end

@@ -10,6 +10,8 @@ class Friendship < ActiveRecord::Base
             .or(arel_table[:friend_id].eq(user.id)))
   }
 
+  scope :by_updated_at, lambda { |date| where(:updated_at => date..Date.tomorrow) }
+
   ##
   # Validations
   #

@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
       .or(arel_table[:phone_number].eq(phone_number)))
   }
 
+  scope :by_updated_at, lambda { |date| where(:updated_at => date..Date.tomorrow) }
+
   ##
   # Validations
   #

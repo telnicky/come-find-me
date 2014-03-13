@@ -7,6 +7,7 @@ class LocationRequest < ActiveRecord::Base
   has_one :sender, :through => :location, :source => :user, :foreign_key => 'user_id'
 
   scope :by_user, lambda { |user| where(:user_id => user.id) }
+  scope :by_updated_at, lambda { |date| where(:updated_at => date..Date.tomorrow) }
 
   ##
   # Validations

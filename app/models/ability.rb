@@ -9,6 +9,7 @@ class Ability
     if user.present?
       # User
       can :search, User
+      can :read, User, :id => user.id
       can :read, User, :friendships => { :user_id => user.id, :accepted => true }
       can :read, User, :friendships => { :friend_id => user.id, :accepted => true }
       can :update, User, :id => user.id
@@ -34,6 +35,9 @@ class Ability
       can :destroy, LocationRequest, :user_id => user.id
       can :destroy, LocationRequest, :location => { :user_id => user.id }
       can :create, LocationRequest
+
+      # sync
+      can :read, :sync
     end
   end
 end
