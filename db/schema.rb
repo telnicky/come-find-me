@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140312022758) do
+ActiveRecord::Schema.define(version: 20140401201132) do
 
   create_table "location_requests", force: true do |t|
     t.integer  "user_id"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20140312022758) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "phone_number"
+    t.string   "facebook_id"
+    t.string   "facebook_access_token"
   end
 
 end
