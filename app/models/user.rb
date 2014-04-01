@@ -5,19 +5,8 @@ class User < ActiveRecord::Base
   ##
   # Associations
   #
-  has_many :friendships, :dependent => :destroy
-  has_many :friends, lambda { Friendship.where(:accepted => true) }, :through => :friendships
-
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-  has_many :inverse_friends, lambda { Friendship.where(:accepted => true) }, :through => :inverse_friendships, :source => :user
-
   has_many :locations, :dependent => :destroy
   has_many :location_requests, :dependent => :destroy
-
-  scope :by_email_or_phone_number, lambda { |email, phone_number|
-    where(arel_table[:email].eq(email)
-      .or(arel_table[:phone_number].eq(phone_number)))
-  }
 
   scope :by_updated_at, lambda { |date| where(:updated_at => date..Date.tomorrow) }
 
@@ -32,10 +21,6 @@ class User < ActiveRecord::Base
   ##
   # Instance Methods
   #
-  def has_friend?(user)
-    friends.include?(user) || inverse_friends.include?(user)
-  end
-
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64

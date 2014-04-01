@@ -18,48 +18,6 @@
   <%= current_user.phone_number %>
 </p>
 
-<h2>Your Friends</h2>
-<ul>
-  <% @friends.each do |friend| %>
-    <li>
-      <%= link_to friend.name, user_path(friend) %>
-    </li>
-  <% end %>
-</ul>
-
-<h2>Inverse friends (Users Who Have Befriended You)</h2>
-<ul>
-  <% @inverse_friends.each do |friend| %>
-    <li>
-      <%= link_to friend.name, user_path(friend) %>
-    </li>
-  <% end %>
-</ul>
-
-<h2>Your Friendships</h2>
-<ul>
-  <% @friendships.each do |friendship| %>
-    <li>
-      <%= link_to friendship.friend.name, user_path(friendship.friend) %>
-      <%= link_to "show", friendship_path(friendship) %>
-      <%= h "(Pending)" if !friendship.accepted? %>
-      (<%= link_to "remove", friendship, :method => :delete %>)
-    </li>
-  <% end %>  
-</ul>
-
-<h2>Inverse frienships</h2>
-<ul>
-  <% @inverse_friendships.each do |friendship| %>
-    <li>
-      <%= link_to friendship.user.name, user_path(friendship.user) %>
-      <%= link_to "show", friendship_path(friendship) %>
-      <%= h "(Pending)" if !friendship.accepted? %>
-      (<%= link_to "remove", friendship, :method => :delete %>)
-    </li>
-  <% end %>
-</ul>
-
 <h2>Locations</h2>
 <ul>
   <% @locations.each do |location| %>

@@ -10,8 +10,6 @@ ComeFindMe::Application.routes.draw do
 
   resources :location_requests
 
-  resources :friendships
-
   resources :password_resets
 
   resources :sessions
@@ -19,9 +17,7 @@ ComeFindMe::Application.routes.draw do
   resources :sync, :only => [ :index ]
   get "sync/from/:from_date", :to => "sync#index"
 
-  resources :users, :except => :index do
-    get :search, :on => :collection
-  end
+  resources :users, :except => :index
 
   root 'sessions#new'
 end

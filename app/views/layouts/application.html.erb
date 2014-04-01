@@ -8,7 +8,6 @@
 </head>
 <body>
   <div>
-    <%= link_to :friendships, friendships_path %>
     <%= link_to :locations, locations_path %>
     <%= link_to :location_requests, location_requests_path %>
     <%= link_to :sync, sync_index_path %>
@@ -18,13 +17,6 @@
     <% else %>
       <%= link_to 'Sign Up', signup_path %> or 
       <%= link_to "Log In", login_path %>
-    <% end %>
-    <%= form_tag(search_users_path, :method => :get) do%>
-      <%= label_tag(:email) %>
-      <%= text_field_tag(:email) %>
-      <%= label_tag(:phone_number) %>
-      <%= text_field_tag(:phone_number, nil, :placeholder => "555-555-5555") %>
-      <%= submit_tag("Search") %>
     <% end %>
   </div>
 

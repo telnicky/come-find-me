@@ -2,11 +2,7 @@ class SyncController < ApplicationController
   authorize_resource :class => false
 
   def index
-    fetch(:friends,
-          :friendships,
-          :inverse_friends,
-          :inverse_friendships,
-          :locations,
+    fetch(:locations,
           :location_requests)
   end
 
@@ -17,22 +13,6 @@ class SyncController < ApplicationController
       method = "fetch_" + resource.to_s
       self.__send__(method)
     end
-  end
-
-  def fetch_friends
-    @friends ||= current_user.friends.by_updated_at(from_date)
-  end
-
-  def fetch_friendships
-    @friendships ||= current_user.friendships.by_updated_at(from_date)
-  end
-
-  def fetch_inverse_friends
-    @inverse_friends ||= current_user.inverse_friends.by_updated_at(from_date)
-  end
-
-  def fetch_inverse_friendships
-    @inverse_friendships ||= current_user.friendships.by_updated_at(from_date)
   end
 
   def fetch_locations

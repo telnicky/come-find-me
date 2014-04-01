@@ -13,17 +13,6 @@ class UsersController < ApplicationController
   def show
   end
 
-  def search
-    @user = User.by_email_or_phone_number(search_params[:email], search_params[:phone_number]).first
-
-    @display_attributes = search_params.map do |key, value|
-      if value.present? && value == @user.try(key)
-        key
-      end
-    end
-    @display_attributes.compact!
-  end
-
   # GET /users/new
   def new
     @user = User.new
@@ -83,10 +72,6 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:email, :name, :phone_number, :password, :password_confirmation, :password_digest)
-    end
-
-    def search_params
-      { :email => params[:email], :phone_number => params[:phone_number] }
     end
 
 end
