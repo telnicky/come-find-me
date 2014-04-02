@@ -12,11 +12,34 @@ class User < ActiveRecord::Base
   # Validations
   #
   validates_uniqueness_of :email, :name
-  validates_presence_of :email, :name
-  validates_format_of :email, :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
+  validates_format_of :email, :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, :allow_blank => true
   validates_format_of :phone_number, :with => /\A\d{3}-\d{3}-\d{4}\z/, :allow_blank => true
+  validate :facebook_access_token_matches_facebook_id
 
   ##
   # Instance Methods
   #
+  def authenticate(access_token)
+    return true if access_token == self.facebook_access_token
+
+    if facebook_access_token_matches_facebook_id?(access_token)
+      self.facebook_access_token = access_token
+      self.save
+    else
+      false
+    end
+  end
+
+  def facebook_access_token_matches_facebook_id
+    unless facebook_access_token_matches_facebook_id?
+      errors.add(:facebook_access_token, "does not match facebook id")
+    end
+  end
+
+  def facebook_access_token_matches_facebook_id?(access_token = self.facebook_access_token)
+    url = "https://graph.facebook.com/me?fields=id&access_token=#{ access_token }"
+    response = JSON.parse(HTTParty.get(url))
+
+    response["id"] == self.facebook_id
+  end
 end

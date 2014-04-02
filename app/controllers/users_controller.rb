@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        cookies.permanent[:email] = @user.email
+        cookies.permanent[:facebook_access_token] = @user.facebook_access_token
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        cookies.permanent[:email] = @user.email
+        cookies.permanent[:facebook_access_token] = @user.facebook_access_token
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -58,6 +58,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
+    cookies.delete(:facebook_access_token)
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
@@ -72,7 +73,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :name, :phone_number)
+      params.require(:user).permit(:email, :name, :phone_number, :facebook_access_token, :facebook_id)
     end
 
 end

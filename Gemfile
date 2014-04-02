@@ -33,9 +33,10 @@ end
 gem 'rspec-rails'
 gem 'pry-nav'
 gem 'cancancan', '~> 1.7'
+gem 'httparty'
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.1.2'
+#gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
 #gem 'unicorn'

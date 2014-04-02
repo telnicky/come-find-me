@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @current_user ||= User.find_by_email!(cookies[:email]) if cookies[:email]
+    @current_user ||= User.find_by_facebook_access_token!(cookies[:facebook_access_token]) if cookies[:facebook_access_token]
   end
   helper_method :current_user
 

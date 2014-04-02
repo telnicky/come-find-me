@@ -19,11 +19,16 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.text_field :phone_number, :placeholder => "555-555-5555" %>
+   <div class="field">
+    <%= f.label :facebook_id %><br>
+    <%= f.text_field :facebook_id %>
   </div>
-   <div class="actions">
+  </div>
+   <div class="field">
+    <%= f.label :facebook_access_token %><br>
+    <%= f.text_field :facebook_access_token %>
+  </div>
+  <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
