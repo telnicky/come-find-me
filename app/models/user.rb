@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   ##
   # Validations
   #
-  validates_uniqueness_of :email, :name
+  validates_uniqueness_of :email, :name, :facebook_id
   validates_format_of :email, :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, :allow_blank => true
   validates_format_of :phone_number, :with => /\A\d{3}-\d{3}-\d{4}\z/, :allow_blank => true
   validate :facebook_access_token_matches_facebook_id

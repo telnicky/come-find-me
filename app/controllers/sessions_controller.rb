@@ -6,7 +6,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_facebook_id(params[:facebook_id])
+    if User.exists?(:facebook_id => params[:facebook_id])
+      @user = User.find_by_facebook_id(params[:facebook_id])
+    else
+      new_user = User.new(user_auth_params)
+      @user = new_user if new_user.save
+    end
+
     respond_to do |format|
       if @user && @user.authenticate(params[:facebook_access_token])
         cookies.permanent[:facebook_access_token] = @user.facebook_access_token
@@ -27,4 +33,13 @@ class SessionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_auth_params
+    {
+      :facebook_access_token => params[:facebook_access_token],
+      :facebook_id => params[:facebook_id]
+    }
+  end
+
 end
