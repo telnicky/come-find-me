@@ -1,3 +1,3 @@
 object @user
-attributes :id, :email, :name, :auth_token
+attributes :id, :email, :name, :facebook_id
 

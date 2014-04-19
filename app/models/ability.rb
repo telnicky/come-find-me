@@ -18,11 +18,11 @@ class Ability
       can :update, Location, :user_id => user.id
       can :destroy, Location, :user_id => user.id
 
-      # Location Requests
+      # Messages
       can :read, Message, :user_id => user.id
-      can :read, Message, :location => { :user_id => user.id }
+      can :read, Message, :sender_id => user.id
       can :destroy, Message, :user_id => user.id
-      can :destroy, Message, :location => { :user_id => user.id }
+      can :destroy, Message, :sender_id => user.id
       can :create, Message
 
       # sync

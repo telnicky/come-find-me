@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   #
   has_many :locations, :dependent => :destroy
   has_many :messages, :dependent => :destroy
+  has_many :sent_messages, :dependent => :destroy, :foreign_key => :sender_id
 
   scope :by_updated_at, lambda { |date| where(:updated_at => date..Date.tomorrow) }
 
