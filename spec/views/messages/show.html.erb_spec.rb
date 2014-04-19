@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe "location_requests/show" do
+describe "messages/show" do
   before(:each) do
-    @location_request = assign(:location_request, stub_model(LocationRequest,
+    @message = assign(:message, stub_model(Message,
       :user_id => 1,
       :location_id => 2
     ))

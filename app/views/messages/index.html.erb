@@ -1,4 +1,4 @@
-<h1>Listing location_requests</h1>
+<h1>Listing messages</h1>
 
 <table>
   <thead>
@@ -12,13 +12,13 @@
   </thead>
 
   <tbody>
-    <% @location_requests.each do |location_request| %>
+    <% @messages.each do |message| %>
       <tr>
-        <td><%= location_request.user_id %></td>
-        <td><%= location_request.location_id %></td>
-        <td><%= link_to 'Show', location_request %></td>
-        <td><%= link_to 'Edit', edit_location_request_path(location_request) %></td>
-        <td><%= link_to 'Destroy', location_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= message.user_id %></td>
+        <td><%= message.location_id %></td>
+        <td><%= link_to 'Show', message %></td>
+        <td><%= link_to 'Edit', edit_message_path(message) %></td>
+        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Location request', new_location_request_path %>
+<%= link_to 'New message', new_message_path %>

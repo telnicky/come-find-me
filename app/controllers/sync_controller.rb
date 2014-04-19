@@ -3,7 +3,7 @@ class SyncController < ApplicationController
 
   def index
     fetch(:locations,
-          :location_requests)
+          :messages)
   end
 
   private
@@ -19,8 +19,8 @@ class SyncController < ApplicationController
     @locations ||= current_user.locations.by_updated_at(from_date)
   end
 
-  def fetch_location_requests
-    @location_requests ||= current_user.location_requests.by_updated_at(from_date)
+  def fetch_messages
+    @messages ||= current_user.messages.by_updated_at(from_date)
   end
 
   def from_date

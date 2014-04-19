@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # Associations
   #
   has_many :locations, :dependent => :destroy
-  has_many :location_requests, :dependent => :destroy
+  has_many :messages, :dependent => :destroy
 
   scope :by_updated_at, lambda { |date| where(:updated_at => date..Date.tomorrow) }
 

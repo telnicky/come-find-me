@@ -1,70 +1,70 @@
-class LocationRequestsController < ApplicationController
+class MessagesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_location_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_message, only: [:show, :edit, :update, :destroy]
 
-  # GET /location_requests
+  # GET /messages
   def index
-    @location_requests = LocationRequest.by_user(current_user) if current_user
+    @messages = Message.by_user(current_user) if current_user
   end
 
-  # GET /location_requests/1
+  # GET /messages/1
   def show
   end
 
-  # GET /location_requests/new
+  # GET /messages/new
   def new
-    @location_request = LocationRequest.new
+    @message = Message.new
   end
 
-  # GET /location_requests/1/edit
+  # GET /messages/1/edit
   def edit
   end
 
-  # POST /location_requests
+  # POST /messages
   def create
-    @location_request = LocationRequest.new(location_request_params)
+    @message = Message.new(message_params)
 
     respond_to do |format|
-      if @location_request.save
-        format.html { redirect_to @location_request, notice: 'location_request was successfully created.' }
-        format.json { render :json => @location_request }
+      if @message.save
+        format.html { redirect_to @message, notice: 'message was successfully created.' }
+        format.json { render :json => @message }
       else
         format.html { render :action => :new }
-        format.json { render json: @location_request.errors, status: :unprocessable_entity }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /location_requests/1
+  # PATCH/PUT /messages/1
   def update
     respond_to do |format|
-      if @location_request.update(location_request_params)
-        format.html { redirect_to @location_request, notice: 'location_request was successfully updated.' }
+      if @message.update(message_params)
+        format.html { redirect_to @message, notice: 'message was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => :edit }
-        format.json { render json: @location_request.errors, status: :unprocessable_entity }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /location_requests/1
+  # DELETE /messages/1
   def destroy
-    @location_request.destroy
+    @message.destroy
     respond_to do |format|
-      format.html { redirect_to location_requests_url }
+      format.html { redirect_to messages_url }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_location_request
-      @location_request = LocationRequest.find(params[:id])
+    def set_message
+      @message = Message.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
-    def location_request_params
-      params.require(:location_request).permit(:user_id, :location_id)
+    def message_params
+      params.require(:message).permit(:user_id, :location_id)
     end
 end

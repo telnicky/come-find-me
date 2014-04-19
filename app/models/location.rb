@@ -3,7 +3,7 @@ class Location < ActiveRecord::Base
   # Associations
   #
   belongs_to :user
-  has_many :location_requests, :dependent => :destroy
+  has_many :messages, :dependent => :destroy
 
   scope :by_user, lambda { |user| where(:user_id => user.id) }
   scope :by_updated_at, lambda { |date| where(:updated_at => date..Date.tomorrow) }

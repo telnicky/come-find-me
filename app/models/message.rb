@@ -1,4 +1,4 @@
-class LocationRequest < ActiveRecord::Base
+class Message < ActiveRecord::Base
   ##
   # Associations
   #

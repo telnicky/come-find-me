@@ -8,7 +8,7 @@ ComeFindMe::Application.routes.draw do
 
   resources :locations
 
-  resources :location_requests
+  resources :messages
 
   resources :password_resets
 

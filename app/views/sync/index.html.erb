@@ -30,15 +30,15 @@
   <% end %>
 </ul>
 
-<h2>Location Requests</h2>
+<h2>Messages</h2>
 <ul>
-  <% @location_requests.each do |location_request| %>
+  <% @messages.each do |message| %>
     <li>
-      From: <%= h location_request.sender.name %>
-      Long: <%= h location_request.location.longitude %>
-      Lat: <%= h location_request.location.latitude %>
-      <%= link_to "show", location_request_path(location_request) %>
-      (<%= link_to "remove", location_request, :method => :delete %>)
+      From: <%= h message.sender.name %>
+      Long: <%= h message.location.longitude %>
+      Lat: <%= h message.location.latitude %>
+      <%= link_to "show", message_path(message) %>
+      (<%= link_to "remove", message, :method => :delete %>)
     </li>
   <% end %>
 </ul>

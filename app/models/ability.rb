@@ -19,11 +19,11 @@ class Ability
       can :destroy, Location, :user_id => user.id
 
       # Location Requests
-      can :read, LocationRequest, :user_id => user.id
-      can :read, LocationRequest, :location => { :user_id => user.id }
-      can :destroy, LocationRequest, :user_id => user.id
-      can :destroy, LocationRequest, :location => { :user_id => user.id }
-      can :create, LocationRequest
+      can :read, Message, :user_id => user.id
+      can :read, Message, :location => { :user_id => user.id }
+      can :destroy, Message, :user_id => user.id
+      can :destroy, Message, :location => { :user_id => user.id }
+      can :create, Message
 
       # sync
       can :read, :sync

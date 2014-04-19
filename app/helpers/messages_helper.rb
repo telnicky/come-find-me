@@ -1,2 +1,2 @@
-module LocationRequestsHelper
+module MessagesHelper
 end
