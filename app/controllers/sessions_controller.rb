@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
       else
         flash.now.alert = "Login was invalid"
         format.html { render :new }
-        format.json { render :json => "Login was invalid", :status => :unprocessable_entity }
+        format.json { render :json => { :error => "Login was invalid" }, :status => :unprocessable_entity }
       end
     end
   end
