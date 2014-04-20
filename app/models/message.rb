@@ -9,7 +9,7 @@ class Message < ActiveRecord::Base
   scope :by_user, lambda { |user|
     where(arel_table[:user_id].eq(user.id)
           .or(arel_table[:sender_id].eq(user.id)))
-    .order(:created_at)
+    .order(:created_at => :desc)
   }
 
   scope :by_updated_at, lambda { |date| where(:updated_at => date..Date.tomorrow) }
