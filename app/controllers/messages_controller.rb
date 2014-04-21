@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
 
   # POST /messages
   def create
-    @message = Message.new(message_params)
+    @message = Message.new(message_params_with_facebook_id)
 
     respond_to do |format|
       if @message.save
@@ -38,7 +38,7 @@ class MessagesController < ApplicationController
   # PATCH/PUT /messages/1
   def update
     respond_to do |format|
-      if @message.update(message_params)
+      if @message.update(message_params_with_facebook_id)
         format.html { redirect_to @message, notice: 'message was successfully updated.' }
         format.json { head :no_content }
       else
@@ -61,6 +61,15 @@ class MessagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_message
       @message = Message.find(params[:id])
+    end
+
+    def message_params_with_facebook_id
+      if params[:facebook_id].present?
+        user = User.find_by_facebook_id(params[:facebook_id])
+        params[:message][:user_id] = user.try(:id)
+      end
+
+      message_params
     end
 
     # Only allow a trusted parameter "white list" through.
