@@ -14,4 +14,5 @@ class Location < ActiveRecord::Base
   validates_presence_of :user, :longitude, :latitude
   validates_inclusion_of :longitude, :in => -180..180, :message => "Invalid value (-180..180)"
   validates_inclusion_of :latitude,  :in => -90..90, :message => "Invalid value (-90..90)"
+  validates_length_of :description, :maximum => 260
 end
