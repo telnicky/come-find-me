@@ -14,6 +14,6 @@ child :sender => :sender do
   extends "users/show"
 end
 
-child :receivers => :receivers do
+child :receivers, :root => :receivers, :object_root => false do
   extends "users/index"
 end
