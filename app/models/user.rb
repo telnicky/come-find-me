@@ -26,8 +26,11 @@ class User < ActiveRecord::Base
     return false if access_token.blank?
     return true if self.facebook_access_token.present? && access_token == self.facebook_access_token
 
-    if facebook_access_token_matches_facebook_id?(access_token)
+    response = fetch_facebook_data(access_token)
+    if response['id'] == self.facebook_id
       self.facebook_access_token = access_token
+      self.first_name = response['first_name']
+      self.last_name = response['last_name']
       self.save
     else
       false
@@ -40,9 +43,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def fetch_facebook_data(access_token = self.facebook_access_token)
+    url = "https://graph.facebook.com/me?fields=id,first_name,last_name&access_token=#{ access_token }"
+    JSON.parse(HTTParty.get(url))
+  end
+
   def facebook_access_token_matches_facebook_id?(access_token = self.facebook_access_token)
-    url = "https://graph.facebook.com/me?fields=id&access_token=#{ access_token }"
+    url = "https://graph.facebook.com/me?fields=id,first_name,last_name&access_token=#{ access_token }"
     response = JSON.parse(HTTParty.get(url))
+
+    # while we have the data lets update the name
+    self.first_name = response['first_name']
+    self.last_name = response['last_name']
 
     response["id"] == self.facebook_id
   end
