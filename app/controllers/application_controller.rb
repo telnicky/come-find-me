@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    token = request.headers['HTTP_FACEBOOK_ACCESS_TOKEN'] || cookies[:facebook_access_token]
+    token = request.headers['HTTP_AUTHORIZATION'] || cookies[:facebook_access_token]
     @current_user ||= User.find_by_facebook_access_token!(token) if token
   end
   helper_method :current_user
