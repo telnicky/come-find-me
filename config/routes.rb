@@ -6,9 +6,13 @@ ComeFindMe::Application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
 
+  resources :broadcasts
+
   resources :locations
 
-  resources :messages
+  resources :messages do
+    get 'broadcasts', :to => 'broadcasts#message_broadcasts', :on => :member
+  end
 
   resources :password_resets
 

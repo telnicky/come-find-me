@@ -2,6 +2,7 @@ class Message < ActiveRecord::Base
   ##
   # Associations
   #
+  has_many :broadcasts
   belongs_to :user
   belongs_to :location
   belongs_to :sender, :class_name => "User"

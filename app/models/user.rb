@@ -4,8 +4,12 @@ class User < ActiveRecord::Base
   # Associations
   #
   has_many :locations, :dependent => :destroy
+
   has_many :messages, :dependent => :destroy
   has_many :sent_messages, :dependent => :destroy, :foreign_key => :sender_id
+
+  has_many :broadcasts, :dependent => :destroy
+  has_many :sent_broadcasts, :dependent => :destroy, :foreign_key => :sender_id
 
   scope :by_updated_at, lambda { |date| where(:updated_at => date..Date.tomorrow) }
 
@@ -33,6 +37,10 @@ class User < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def current_location
+    locations.where(:id => self.current_location_id).first
   end
 
   def fetch_facebook_data(access_token = self.facebook_access_token)

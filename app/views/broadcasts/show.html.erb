@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @broadcast.user_id %>
+</p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @broadcast.sender_id %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @broadcast.message_id %>
+</p>
+
+<%= link_to 'Edit', edit_broadcast_path(@broadcast) %> |
+<%= link_to 'Back', broadcasts_path %>

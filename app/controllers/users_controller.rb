@@ -74,6 +74,7 @@ class UsersController < ApplicationController
                                    :name,
                                    :first_name,
                                    :last_name,
+                                   :current_location_id,
                                    :phone_number)
     end
 
