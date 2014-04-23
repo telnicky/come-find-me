@@ -9,8 +9,7 @@ class SessionsController < ApplicationController
     if User.exists?(:facebook_id => params[:facebook_id])
       @user = User.find_by_facebook_id(params[:facebook_id])
     else
-      new_user = User.new(user_auth_params)
-      @user = new_user if new_user.save
+      @user = User.new(user_auth_params)
     end
 
     respond_to do |format|

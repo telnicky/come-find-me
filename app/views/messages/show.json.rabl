@@ -1,5 +1,5 @@
 object @message
-attributes :id, :user_id, :location_id, :sender_id
+attributes :id, :user_id, :location_id, :sender_id, :read
 
 node :created_at do |message|
   # YYYY-MM-DD HH:MM:SS ±HHMM

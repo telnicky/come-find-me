@@ -6,6 +6,10 @@ class Message < ActiveRecord::Base
   belongs_to :location
   belongs_to :sender, :class_name => "User"
 
+  scope :unread_messages_by_user, lambda { |user|
+    where(:user_id => user.id, :read => false)
+  }
+
   scope :by_user, lambda { |user|
     where(arel_table[:user_id].eq(user.id)
           .or(arel_table[:sender_id].eq(user.id)))

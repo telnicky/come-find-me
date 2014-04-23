@@ -17,14 +17,12 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, :allow_blank => true
   validates_format_of :phone_number, :with => /\A\d{3}-\d{3}-\d{4}\z/, :allow_blank => true
   validates_presence_of :facebook_id
-  validate :facebook_access_token_matches_facebook_id
 
   ##
   # Instance Methods
   #
   def authenticate(access_token)
     return false if access_token.blank?
-    return true if self.facebook_access_token.present? && access_token == self.facebook_access_token
 
     response = fetch_facebook_data(access_token)
     if response['id'] == self.facebook_id
@@ -37,25 +35,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  def facebook_access_token_matches_facebook_id
-    unless facebook_access_token_matches_facebook_id?
-      errors.add(:facebook_access_token, "does not match facebook id")
-    end
-  end
-
   def fetch_facebook_data(access_token = self.facebook_access_token)
     url = "https://graph.facebook.com/me?fields=id,first_name,last_name&access_token=#{ access_token }"
     JSON.parse(HTTParty.get(url))
   end
 
-  def facebook_access_token_matches_facebook_id?(access_token = self.facebook_access_token)
-    url = "https://graph.facebook.com/me?fields=id,first_name,last_name&access_token=#{ access_token }"
-    response = JSON.parse(HTTParty.get(url))
-
-    # while we have the data lets update the name
-    self.first_name = response['first_name']
-    self.last_name = response['last_name']
-
-    response["id"] == self.facebook_id
+  def unread_messages
+    Message.unread_messages_by_user(self)
   end
 end
