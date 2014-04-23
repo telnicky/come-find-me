@@ -38,7 +38,7 @@ class MessagesController < ApplicationController
   # PATCH/PUT /messages/1
   def update
     respond_to do |format|
-      if @message.update(message_params_with_facebook_id)
+      if @message.update(message_update_params)
         format.html { redirect_to @message, notice: 'message was successfully updated.' }
         format.json { head :no_content }
       else
@@ -70,6 +70,10 @@ class MessagesController < ApplicationController
       end
 
       message_params
+    end
+
+    def message_update_params
+      params.require(:message).permit(:read)
     end
 
     # Only allow a trusted parameter "white list" through.
