@@ -35,6 +35,7 @@ class Ability
       can :read, Broadcast, :sender_id => user.id
       can :destroy, Broadcast, :sender_id => user.id
       can :message_broadcasts, Broadcast, :user_id => user.id
+      can :message_broadcasts, Broadcast, :sender_id => user.id
     end
   end
 end

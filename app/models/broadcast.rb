@@ -10,15 +10,21 @@ class Broadcast < ActiveRecord::Base
   ##
   # Scopes
   #
-  scope :by_user, lambda { |user| where(:user_id => user.id) }
   scope :by_message_id, lambda { |message_id|
     where(:message_id => message_id)
+  }
+
+  scope :by_user, lambda { |user|
+    where(arel_table[:user_id].eq(user.id)
+          .or(arel_table[:sender_id].eq(user.id)))
+    .order(:created_at => :desc)
   }
 
   ##
   # Validations
   #
   validates_presence_of :user, :message, :sender
+  validates_uniqueness_of :user_id, :scope => [ :message_id, :sender_id ]
 
 
 end

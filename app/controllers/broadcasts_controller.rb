@@ -1,5 +1,5 @@
 class BroadcastsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:message_broadcasts]
   before_action :set_broadcast, only: [:show, :edit, :destroy]
 
   # GET /broadcasts
@@ -46,6 +46,7 @@ class BroadcastsController < ApplicationController
   # GET /messages/1/broadcasts
   def message_broadcasts
     @broadcasts = Broadcast.by_message_id(params[:id]).by_user(current_user)
+    authorize!(:message_broadcasts, Broadcast)
     render :index
   end
 

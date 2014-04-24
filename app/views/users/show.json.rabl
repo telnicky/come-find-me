@@ -11,7 +11,3 @@ node(:current_location) do |user|
   end
 end
 
-#child :current_location => :current_location, :object_root => false, :if => lambda { |user|
-#  user.id == current_user.id || locals[:broadcast] } do
-#    extends "locations/show"
-#  end
