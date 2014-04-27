@@ -8,7 +8,9 @@ ComeFindMe::Application.routes.draw do
 
   resources :broadcasts
 
-  resources :locations
+  resources :locations do
+    get 'broadcasts', :to => 'broadcasts#location_broadcasts', :on => :member
+  end
 
   resources :messages do
     get 'broadcasts', :to => 'broadcasts#message_broadcasts', :on => :member

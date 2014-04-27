@@ -1,5 +1,5 @@
 class BroadcastsController < ApplicationController
-  load_and_authorize_resource :except => [:message_broadcasts]
+  load_and_authorize_resource :except => [:location_broadcasts, :message_broadcasts]
   before_action :set_broadcast, only: [:show, :edit, :destroy]
 
   # GET /broadcasts
@@ -41,6 +41,14 @@ class BroadcastsController < ApplicationController
       format.html { redirect_to broadcasts_url }
       format.json { head :no_content }
     end
+  end
+
+  # GET /locations/1/broadcasts
+  def location_broadcasts
+    messages = Message.where(:location_id => params[:id])
+    @broadcasts = Broadcast.by_message_id(messages.pluck(:id)).by_user(current_user)
+    authorize!(:location_broadcasts, Broadcast)
+    render :index
   end
 
   # GET /messages/1/broadcasts
